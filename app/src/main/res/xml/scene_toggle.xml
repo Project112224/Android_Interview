@@ -2,7 +2,6 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
-    <!-- 按下按鈕展開 -->
     <Transition
         motion:constraintSetStart="@+id/start"
         motion:constraintSetEnd="@+id/end"
@@ -12,7 +11,6 @@
             motion:targetId="@+id/fragment_flower_comment_btn"
             motion:clickAction="toggle" />
 
-        <!-- A 淡出 -->
         <KeyFrameSet>
             <KeyAttribute
                 motion:motionTarget="@id/fragment_flower_comment_btn"
@@ -23,7 +21,6 @@
                 motion:framePosition="50"
                 android:alpha="0" />
 
-            <!-- B 淡入 -->
             <KeyAttribute
                 motion:motionTarget="@id/fragment_flower_llayout"
                 motion:framePosition="50"
@@ -35,7 +32,6 @@
         </KeyFrameSet>
     </Transition>
 
-    <!-- 按下返回按鈕收回 -->
     <Transition
         motion:constraintSetStart="@+id/end"
         motion:constraintSetEnd="@+id/start"

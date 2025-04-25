@@ -8,9 +8,7 @@ import com.skydoves.sandwich.message
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import kotlin.math.abs
@@ -22,10 +20,6 @@ class FlowerViewModel : ViewModel() {
     private var originData: MutableList<AttractionResponse>  = arrayListOf()
 
     private var page = 0
-
-    private var _showComment = MutableStateFlow(false)
-    val showComment: StateFlow<Boolean>
-        get() = _showComment
 
     private var _attractionsData = MutableSharedFlow<List<AttractionResponse>>(1)
     val attractionsData: SharedFlow<List<AttractionResponse>>
@@ -58,13 +52,6 @@ class FlowerViewModel : ViewModel() {
                 .suspendOnFailure {
                     Timber.e(this.message())
                 }
-        }
-    }
-
-    fun setCommentVisit(state: Boolean) {
-        viewModelScope.launch {
-            Timber.i("comment state: $state")
-            _showComment.emit(state)
         }
     }
 

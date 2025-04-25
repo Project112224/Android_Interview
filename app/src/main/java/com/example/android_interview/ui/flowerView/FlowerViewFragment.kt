@@ -1,8 +1,11 @@
 package com.example.android_interview.ui.flowerView
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -14,7 +17,6 @@ import com.example.android_interview.Global
 import com.example.android_interview.R
 import com.example.android_interview.base.BaseFragment
 import com.example.android_interview.databinding.FragmentFlowerViewBinding
-import com.example.android_interview.extension.hideKeyboard
 import com.example.android_interview.extension.viewBinding
 import com.example.android_interview.model.loading.Loading
 import com.example.android_interview.model.response.AttractionResponse
@@ -57,14 +59,6 @@ class FlowerViewFragment : BaseFragment<FragmentFlowerViewBinding>() {
                 addItemDecoration(HeaderItemDecoration(Global.HEADER_HEIGHT))
             }
 
-            fragmentFlowerCommentBtn.setOnClickListener {
-                viewModel.setCommentVisit(fragmentFlowerCommentBtn.visibility == View.VISIBLE)
-            }
-
-            fragmentFlowerSearchBtn.setOnClickListener {
-                viewModel.setCommentVisit(fragmentFlowerCommentBtn.visibility == View.VISIBLE)
-            }
-
             fragmentFlowerSearchEt.addTextChangedListener {
                 val input = it.toString()
                 viewModel.filter(input)
@@ -84,6 +78,28 @@ class FlowerViewFragment : BaseFragment<FragmentFlowerViewBinding>() {
                         viewModel.fetchAttractions()
                     }
                 }
+            })
+            
+            fragmentFlowerCommentMlayout.setTransitionListener(object : MotionLayout.TransitionListener {
+                override fun onTransitionStarted(
+                    motionLayout: MotionLayout, startId: Int, endId: Int
+                ) {/* Not do anything */}
+
+                override fun onTransitionChange(
+                    motionLayout: MotionLayout, startId: Int, endId: Int, progress: Float
+                ) {/* Not do anything */}
+
+                override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+                    if (currentId == R.id.end) {
+                        binding.fragmentFlowerSearchEt.requestFocus()
+                        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                        imm?.showSoftInput(binding.fragmentFlowerSearchEt, InputMethodManager.SHOW_IMPLICIT)
+                    }
+                }
+
+                override fun onTransitionTrigger(
+                    motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float
+                ) {/* Not do anything */}
             })
         }
     }
@@ -110,12 +126,6 @@ class FlowerViewFragment : BaseFragment<FragmentFlowerViewBinding>() {
                         Loading.hide()
                     }
                 }
-
-                launch {
-                    viewModel.showComment.collect {
-                        onSetCommentUI(it)
-                    }
-                }
             }
         }
     }
@@ -133,17 +143,6 @@ class FlowerViewFragment : BaseFragment<FragmentFlowerViewBinding>() {
             startActivity(intent)
         } catch (ex: ActivityNotFoundException) {
             Toast.makeText(context, mainActivity?.localizedResources?.getString(R.string.can_not_open_map_toast), Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun onSetCommentUI(isShow: Boolean) {
-        binding.apply {
-            if (isShow) {
-                fragmentFlowerSearchEt.requestFocus()
-            } else {
-                hideKeyboard()
-                root.clearFocus()
-            }
         }
     }
 }
