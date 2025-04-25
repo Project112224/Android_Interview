@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Android Interview</string>
+
+    <!--  HomeFragment -->
+    <string name="flower_view">Flower Viewing Spots</string>
+    <string name="tour_place">Coastal Areas</string>
+
+    <!--  FlowerFragment -->
+    <string name="flower_type">%s 🌼</string>
+    <string name="flower_search_hint">請輸入查詢關鍵字</string>
+
+    <!--  TourDetailFragment  -->
+    <string name="tour_web_url_title">Detailed official website</string>
+    <string name="tour_map_title">➡️ View map</string>
+
+    <!--  dialog  -->
+    <string name="error">Error</string>
+    <string name="timeout_message">Connection timed out. Please try again later.</string>
+    <string name="no_network_message">No internet connection.</string>
+    <string name="system_error_message">System error, code: %s</string>
+    <string name="confirm">confirm</string>
+
+    <!--  common  -->
+    <string name="now_empty_info">No data available.</string>
+    <string name="loading_title">Loading…</string>
+    <string name="can_not_open_map_toast">map app not found.</string>
+</resources>

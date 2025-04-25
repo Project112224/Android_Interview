@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.android_interview.ui.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/tourDetailFragment"
+        android:name="com.example.android_interview.ui.tourDetail.TourDetailFragment"
+        android:label="TourDetailFragment" >
+        <argument
+            android:name="scenicSpot"
+            app:argType="com.example.android_interview.model.response.ScenicSpotResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.example.android_interview.ui.webView.WebViewFragment"
+        android:label="WebView" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+</navigation>

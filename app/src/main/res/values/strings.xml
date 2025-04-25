@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Android 面試</string>
+
+    <!--  HomeFragment -->
+    <string name="flower_view">賞花</string>
+    <string name="tour_place">海域遊憩景點</string>
+
+    <!--  FlowerFragment -->
+    <string name="flower_type">%s 🌼</string>
+    <string name="flower_search_hint">請輸入查詢關鍵字</string>
+
+    <!--  TourDetailFragment  -->
+    <string name="tour_web_url_title">詳細官方網址</string>
+    <string name="tour_map_title">➡️ 查看地圖</string>
+
+    <!--  dialog  -->
+    <string name="error">錯誤</string>
+    <string name="timeout_message">連線逾時，請稍後再試</string>
+    <string name="no_network_message">目前無網路連線</string>
+    <string name="system_error_message">系統錯誤, code: %s</string>
+    <string name="confirm">確認</string>
+
+    <!--  common  -->
+    <string name="now_empty_info">目前無任何資訊</string>
+    <string name="loading_title">Loading…</string>
+    <string name="can_not_open_map_toast">找不到可以開啟地圖的應用程式</string>
+
+</resources>
