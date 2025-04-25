@@ -16,7 +16,7 @@
     <!--  dialog  -->
     <string name="error">錯誤</string>
     <string name="timeout_message">連線逾時，請稍後再試</string>
-    <string name="no_network_message">目前無網路連線</string>
+    <string name="no_network_message">伺服器錯誤，請稍後再試</string>
     <string name="system_error_message">系統錯誤, code: %s</string>
     <string name="confirm">確認</string>
 

@@ -16,7 +16,7 @@
     <!--  dialog  -->
     <string name="error">Error</string>
     <string name="timeout_message">Connection timed out. Please try again later.</string>
-    <string name="no_network_message">No internet connection.</string>
+    <string name="no_network_message">Server error. Please try again later.</string>
     <string name="system_error_message">System error, code: %s</string>
     <string name="confirm">confirm</string>
 
