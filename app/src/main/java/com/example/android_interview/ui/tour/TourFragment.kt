@@ -107,7 +107,6 @@ class TourFragment : BaseFragment<FragmentTourBinding>() {
     }
 
     private fun onItemClick(data: ScenicSpotResponse) {
-        Loading.show()
         val bundle = Bundle().apply { putParcelable(TourDetailFragmentArgs.ScenicSpot.key, data) }
         findNavController().navigate(R.id.tourDetailFragment, bundle)
     }

@@ -18,44 +18,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/navigation_main" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/activity_loading"
+        android:name="com.example.android_interview.ui.loading.LoadingFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/loading_bg"
-        android:clickable="true"
-        android:focusable="true"
         android:visibility="gone"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/activity_loading_llayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_loading_rounded"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:padding="16dp"
-            android:orientation="vertical"
-            android:visibility="visible"
-            app:layout_constraintDimensionRatio="w,1:1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/activity_loading_title_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/loading_title" />
-
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

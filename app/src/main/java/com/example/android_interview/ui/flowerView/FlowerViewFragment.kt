@@ -29,12 +29,12 @@ import timber.log.Timber
 
 class FlowerViewFragment : BaseFragment<FragmentFlowerViewBinding>() {
 
-    private  val viewModel: FlowerViewModel by viewModels()
+    private val viewModel: FlowerViewModel by viewModels()
 
     private val listAdapter: FlowerListAdapter by lazy {
         FlowerListAdapter(
             resources = mainActivity?.localizedResources,
-            onAddressClick=::onOpenGoogleMap
+            onAddressClick = ::onOpenGoogleMap
         )
     }
 
@@ -65,7 +65,13 @@ class FlowerViewFragment : BaseFragment<FragmentFlowerViewBinding>() {
             }
 
             fragmentFlowerSwipeRefresh.setOnRefreshListener {
-                viewModel.refreshAttractions()
+                val searchMode = fragmentFlowerLlayout.visibility == View.VISIBLE
+                if (!searchMode) {
+                    Loading.show()
+                    viewModel.refreshAttractions()
+                } else {
+                    fragmentFlowerSwipeRefresh.isRefreshing = false
+                }
             }
 
             fragmentFlowerRcycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -74,32 +80,42 @@ class FlowerViewFragment : BaseFragment<FragmentFlowerViewBinding>() {
                     val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                     val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
                     val totalItemCount = layoutManager.itemCount
-                    if (lastVisibleItemPosition == totalItemCount - 1 && !Loading.state.value) {
+                    val searchMode = fragmentFlowerLlayout.visibility == View.VISIBLE
+                    if (lastVisibleItemPosition == totalItemCount - 1 && !Loading.state.value && !searchMode) {
+                        Loading.show()
                         viewModel.fetchAttractions()
                     }
                 }
             })
-            
-            fragmentFlowerCommentMlayout.setTransitionListener(object : MotionLayout.TransitionListener {
+
+            fragmentFlowerCommentMlayout.setTransitionListener(object :
+                MotionLayout.TransitionListener {
                 override fun onTransitionStarted(
                     motionLayout: MotionLayout, startId: Int, endId: Int
-                ) {/* Not do anything */}
+                ) {/* Not do anything */
+                }
 
                 override fun onTransitionChange(
                     motionLayout: MotionLayout, startId: Int, endId: Int, progress: Float
-                ) {/* Not do anything */}
+                ) {/* Not do anything */
+                }
 
                 override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                     if (currentId == R.id.end) {
                         binding.fragmentFlowerSearchEt.requestFocus()
-                        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                        imm?.showSoftInput(binding.fragmentFlowerSearchEt, InputMethodManager.SHOW_IMPLICIT)
+                        val imm =
+                            context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                        imm?.showSoftInput(
+                            binding.fragmentFlowerSearchEt,
+                            InputMethodManager.SHOW_IMPLICIT
+                        )
                     }
                 }
 
                 override fun onTransitionTrigger(
                     motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float
-                ) {/* Not do anything */}
+                ) {/* Not do anything */
+                }
             })
         }
     }
@@ -142,7 +158,11 @@ class FlowerViewFragment : BaseFragment<FragmentFlowerViewBinding>() {
             val intent = ActionUtil.onGoogleMap(uri)
             startActivity(intent)
         } catch (ex: ActivityNotFoundException) {
-            Toast.makeText(context, mainActivity?.localizedResources?.getString(R.string.can_not_open_map_toast), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                mainActivity?.localizedResources?.getString(R.string.can_not_open_map_toast),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

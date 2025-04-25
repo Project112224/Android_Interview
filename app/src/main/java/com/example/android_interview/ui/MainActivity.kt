@@ -13,6 +13,7 @@ import com.example.android_interview.R
 import com.example.android_interview.base.BaseActivity
 import com.example.android_interview.databinding.ActivityMainBinding
 import com.example.android_interview.extension.viewBinding
+import com.example.android_interview.model.loading.Loading
 import com.example.android_interview.util.GlobalEventBus
 import com.example.android_interview.util.types.SharedPreferencesType
 import kotlinx.coroutines.flow.StateFlow
@@ -88,6 +89,7 @@ class MainActivity: BaseActivity<ActivityMainBinding>() {
     }
 
     private fun showTimeoutDialog() {
+        hideLoading()
         AlertDialog.Builder(this)
             .setTitle(localizedResources?.getString(R.string.error))
             .setMessage(localizedResources?.getString(R.string.timeout_message))
@@ -96,6 +98,7 @@ class MainActivity: BaseActivity<ActivityMainBinding>() {
     }
 
     private fun showNoNetworkDialog() {
+        hideLoading()
         AlertDialog.Builder(this)
             .setTitle(localizedResources?.getString(R.string.error))
             .setMessage(localizedResources?.getString(R.string.no_network_message))
@@ -104,6 +107,7 @@ class MainActivity: BaseActivity<ActivityMainBinding>() {
     }
 
     private fun showHttpErrorDialog(code: Int?) {
+        hideLoading()
         AlertDialog.Builder(this)
             .setTitle(localizedResources?.getString(R.string.error))
             .setMessage(localizedResources?.getString(R.string.system_error_message, "$code"))
